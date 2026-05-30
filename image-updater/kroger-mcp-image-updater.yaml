@@ -1,0 +1,29 @@
+# argocd-image-updater CR for kroger-mcp. Follows the canonical
+# distributed-IU pattern (per feedback_image_updater_crd_not_annotations
+# + homelab#236): the CR lives in this deploy repo's image-updater/ dir
+# and is enrolled into the cluster via the image-updater-apps
+# ApplicationSet in argocd-projects.
+#
+# Strategy: follow semver releases on Harbor's :0.x tags. dvystrcil/
+# release-action@v0.1.1 (auto patch-bump in kroger-mcp-docker's GHA)
+# stamps semver tags like v0.0.6 → harbor image 0.0.6. IU writes back
+# the new newTag into base/kustomization.yaml on every promotion.
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: kroger-mcp
+spec:
+  applicationRefs:
+    - namePattern: kroger-mcp
+      images:
+        - alias: kroger-mcp
+          imageName: harbor.sirddail.net/ai/kroger-mcp:0.x
+          commonUpdateSettings:
+            pullSecret: pullsecret:kroger-mcp/kroger-mcp-harbor-pull
+            forceUpdate: false
+      writeBackConfig:
+        method: git
+        gitConfig:
+          repository: https://github.com/dvystrcil/kroger-mcp.git
+          branch: main
+          writeBackTarget: kustomization:/base
