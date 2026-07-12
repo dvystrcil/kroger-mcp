@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: kroger-mcp
-
 resources:
   - namespace.yaml
   - infisical-secret.yaml
@@ -13,7 +11,6 @@ resources:
   - service.yaml
   # HTTPRoute moved to dvystrcil/gateway-services chart (homelab#131).
   # Argo Application now multi-sources kustomize (here) + chart (route).
-
 images:
   - name: harbor.sirddail.net/ai/kroger-mcp
-    newTag: 0.0.6
+    newTag: 0.0.7
