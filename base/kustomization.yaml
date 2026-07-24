@@ -9,6 +9,7 @@ resources:
   - pvc.yaml
   - deployment.yaml
   - service.yaml
+  - vpa.yaml
   # HTTPRoute moved to dvystrcil/gateway-services chart (homelab#131).
   # Argo Application now multi-sources kustomize (here) + chart (route).
 images:
