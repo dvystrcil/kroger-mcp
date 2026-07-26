@@ -26,4 +26,4 @@ spec:
         gitConfig:
           repository: https://github.com/dvystrcil/kroger-mcp.git
           branch: main
-          writeBackTarget: kustomization:/base
+          writeBackTarget: kustomization:/overlays
