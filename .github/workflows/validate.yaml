@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: dvystrcil/kustomize-validate-action@v1
+      - uses: dvystrcil/kustomize-validate-action@feat/reloader-coverage-check
