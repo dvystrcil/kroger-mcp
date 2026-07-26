@@ -5,6 +5,8 @@ metadata:
   namespace: kroger-mcp
   labels:
     app: kroger-mcp
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   strategy:
